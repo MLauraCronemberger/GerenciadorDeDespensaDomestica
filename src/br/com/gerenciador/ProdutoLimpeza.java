@@ -1,12 +1,12 @@
 package br.com.gerenciador;
-
-//import java.time.LocalDate;
+import java.time.LocalDate;
 
 public class ProdutoLimpeza extends Produto {
     protected boolean inflamavel;
     protected String tipo; // Ex: desinfetante, detergente, sabão em pó
 
-    public ProdutoLimpeza(boolean inflamavel, String tipo) {
+    public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca,boolean inflamavel, String tipo) {
+        super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
         this.inflamavel = inflamavel;
         this.tipo = tipo;
     }

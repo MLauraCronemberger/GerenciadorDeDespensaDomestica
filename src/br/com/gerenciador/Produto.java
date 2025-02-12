@@ -9,10 +9,10 @@ public abstract class Produto {
     protected String localArmazenamento;
     protected String marca;
 
-    public void Produto(String nome, Double quantidade, String localAramazenamento, LocalDate datacompra, LocalDate validade, String marca){
+    public Produto(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca){
         this.nome= nome;
         this.quantidade= quantidade;
-        this.localArmazenamento= localAramazenamento;
+        this.localArmazenamento= localArmazenamento;
         this.datacompra= datacompra;
         this.validade = validade;
         this.marca= marca;

@@ -1,10 +1,12 @@
 package br.com.gerenciador;
+import java.time.LocalDate;
 
 public class ProdutoHigiene extends Produto {
-    protected String partedocorpo;
+    protected String parteDoCorpo;
 
-    public ProdutoHigiene(String partedocorpo) {
-        this.partedocorpo = partedocorpo;
+    public ProdutoHigiene(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String parteDoCorpo) {
+        super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
+        this.parteDoCorpo = parteDoCorpo;
     }
 
     @Override
@@ -13,10 +15,10 @@ public class ProdutoHigiene extends Produto {
     }
 
     public String getPartedocorpo() {
-        return partedocorpo;
+        return parteDoCorpo;
     }
 
     public void setPartedocorpo(String partedocorpo) {
-        this.partedocorpo = partedocorpo;
+        this.parteDoCorpo = partedocorpo;
     }
 }

@@ -12,7 +12,7 @@ public class Interface extends JFrame {
     private JTextField campoNome, campoQuantidade, campoLocal, campoMarca, campoValidade;
     private JComboBox<String> categoriaBox;
     private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkOrganico;
-    private JTextField campoParteCorpo, campoTipoLimpeza;
+    private JTextField campoRestricoesAlimentares, campoParteCorpo, campoTipoLimpeza;
     private JCheckBox checkInflamavel;
     private JList<String> produtosList;
     private DefaultListModel<String> listModel;
@@ -92,9 +92,12 @@ public class Interface extends JFrame {
         checkRefrigerado = new JCheckBox("Refrigerado");
         checkCongelado = new JCheckBox("Congelado");
         checkOrganico = new JCheckBox("Orgânico");
+        campoRestricoesAlimentares = new JTextField(20);
         perecivelPanel.add(checkRefrigerado);
         perecivelPanel.add(checkCongelado);
         perecivelPanel.add(checkOrganico);
+        perecivelPanel.add(new JLabel("Restrições Alimentares:"));
+        perecivelPanel.add(campoRestricoesAlimentares);
 
         // Campos para Alimento Não Perecível
         JPanel naoPerecivelPanel = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -103,6 +106,8 @@ public class Interface extends JFrame {
         naoPerecivelPanel.add(checkEnlatado);
         naoPerecivelPanel.add(checkEmbalagemVacuo);
         naoPerecivelPanel.add(checkOrganico);
+        naoPerecivelPanel.add(new JLabel("Restrições Alimentares:"));
+        naoPerecivelPanel.add(campoRestricoesAlimentares);
 
         // Campos para Produto de Higiene
         JPanel higienePanel = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -185,17 +190,17 @@ public class Interface extends JFrame {
                 case "Alimento Perecível":
                     produto = new AlimentoPerecivel(
                             nome, quantidade, local, dataCompra, validade, marca,
-                            checkOrganico.isSelected(),
+                            campoRestricoesAlimentares.getText(), checkOrganico.isSelected(),
                             checkRefrigerado.isSelected(), checkCongelado.isSelected(),
-                            dataCompra // dataFabricacao
+                            false, dataCompra
                     );
                     break;
                 case "Alimento Não Perecível":
                     produto = new AlimentoNaoPerecivel(
                             nome, quantidade, local, dataCompra, validade, marca,
-                            checkOrganico.isSelected(),
+                            campoRestricoesAlimentares.getText(), checkOrganico.isSelected(),
                             checkEnlatado.isSelected(), checkEmbalagemVacuo.isSelected(),
-                            "Lugar seco" // modoArmazenamento
+                            false, "Lugar seco"
                     );
                     break;
                 case "Produto de Higiene":
@@ -280,13 +285,15 @@ public class Interface extends JFrame {
             categoriaBox.setSelectedItem("Alimento Perecível");
             checkRefrigerado.setSelected(ap.getRefrigerado());
             checkCongelado.setSelected(ap.getCongelado());
-            checkOrganico.setSelected(ap.getOrganico());
+            checkOrganico.setSelected(((Alimento) ap).getOrganico());
+            campoRestricoesAlimentares.setText(((Alimento) ap).getRestricoesAlimentares());
         } else if (produto instanceof AlimentoNaoPerecivel) {
             AlimentoNaoPerecivel anp = (AlimentoNaoPerecivel) produto;
             categoriaBox.setSelectedItem("Alimento Não Perecível");
             checkEnlatado.setSelected(anp.getEnlatado());
             checkEmbalagemVacuo.setSelected(anp.getEmbalagemVacuo());
-            checkOrganico.setSelected(anp.getOrganico());
+            checkOrganico.setSelected(((Alimento) anp).getOrganico());
+            campoRestricoesAlimentares.setText(((Alimento) anp).getRestricoesAlimentares());
         } else if (produto instanceof ProdutoHigiene) {
             ProdutoHigiene ph = (ProdutoHigiene) produto;
             categoriaBox.setSelectedItem("Produto de Higiene");
@@ -312,6 +319,7 @@ public class Interface extends JFrame {
         campoLocal.setText("");
         campoMarca.setText("");
         campoValidade.setText("");
+        campoRestricoesAlimentares.setText("");
         campoParteCorpo.setText("");
         campoTipoLimpeza.setText("");
 
@@ -340,4 +348,3 @@ public class Interface extends JFrame {
         });
     }
 }
-

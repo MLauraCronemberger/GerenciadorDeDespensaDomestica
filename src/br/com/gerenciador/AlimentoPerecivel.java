@@ -32,7 +32,7 @@ public class AlimentoPerecivel extends Alimento {
 
 
 
-    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, LocalDate dataFabricacao) {
+    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected, LocalDate dataFabricacao) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
         this.refrigerado = refrigerado;
         this.congelado = congelado;

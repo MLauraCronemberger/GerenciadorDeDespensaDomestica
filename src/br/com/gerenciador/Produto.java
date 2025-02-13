@@ -9,17 +9,6 @@ public abstract class Produto {
     protected String localArmazenamento;
     protected String marca;
 
-    public Produto(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca){
-        this.nome= nome;
-        this.quantidade= quantidade;
-        this.localArmazenamento= localArmazenamento;
-        this.datacompra= datacompra;
-        this.validade = validade;
-        this.marca= marca;
-
-        
-    }
-
     public abstract String getCategoria();
 
     public String getNome() {
@@ -68,5 +57,16 @@ public abstract class Produto {
 
     public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    public Produto(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca){
+        this.nome= nome;
+        this.quantidade= quantidade;
+        this.localArmazenamento= localArmazenamento;
+        this.datacompra= datacompra;
+        this.validade = validade;
+        this.marca= marca;
+
+        
     }
 }

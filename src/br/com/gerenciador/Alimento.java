@@ -2,16 +2,7 @@ package br.com.gerenciador;
 import java.time.LocalDate;
 
 public class Alimento extends Produto {
-    protected String restricoesAlimentares; // Ex: sem glúten, sem lactose
-    protected boolean organico;
-
-    public String getRestricoesAlimentares() {
-        return restricoesAlimentares;
-    }
-
-    public void setRestricoesAlimentares(String restricoesAlimentares) {
-        this.restricoesAlimentares = restricoesAlimentares;
-    }
+    protected boolean organico; // Indica se o alimento é orgânico
 
     public boolean getOrganico() {
         return organico;
@@ -21,11 +12,11 @@ public class Alimento extends Produto {
         this.organico = organico;
     }
 
-        public Alimento(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca,String restricoesAlimentares, boolean organico) {
+    // Construtor atualizado (sem restricoesAlimentares)
+    public Alimento(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra,
+                    LocalDate validade, String marca, boolean organico) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
-        this.restricoesAlimentares = restricoesAlimentares;
         this.organico = organico;
-
     }
 
     @Override

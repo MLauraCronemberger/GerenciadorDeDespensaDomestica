@@ -30,18 +30,15 @@ public class AlimentoPerecivel extends Alimento {
         this.dataFabricacao = dataFabricacao;
     }
 
-    // Construtor atualizado (sem restricoesAlimentares)
-    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra,
-                             LocalDate validade, String marca, boolean organico, boolean refrigerado,
-                             boolean congelado, LocalDate dataFabricacao) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, organico);
+
+
+    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected, LocalDate dataFabricacao) {
+        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
         this.refrigerado = refrigerado;
         this.congelado = congelado;
         this.dataFabricacao = dataFabricacao;
     }
 }
-
-
 
 
     

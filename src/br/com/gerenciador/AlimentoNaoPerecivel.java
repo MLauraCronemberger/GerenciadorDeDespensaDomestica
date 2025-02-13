@@ -30,13 +30,11 @@ public class AlimentoNaoPerecivel extends Alimento {
         this.modoArmazenamento = modoArmazenamento;
     }
 
-    // Construtor atualizado (sem restricoesAlimentares)
-    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra,
-                                LocalDate validade, String marca, boolean organico, boolean enlatado,
-                                boolean embalagemVacuo, String modoArmazenamento) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, organico);
+    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
+        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
         this.enlatado = enlatado;
         this.embalagemVacuo = embalagemVacuo;
         this.modoArmazenamento = modoArmazenamento;
     }
 }
+

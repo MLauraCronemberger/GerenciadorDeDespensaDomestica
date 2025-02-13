@@ -211,8 +211,7 @@ public class Interface extends JFrame {
                     break;
                 case "Produto de Limpeza":
                     produto = new ProdutoLimpeza(
-                            nome, quantidade, local, dataCompra, validade, marca,
-                            checkInflamavel.isSelected(), campoTipoLimpeza.getText()
+                            nome, quantidade, local, dataCompra, validade, marca, checkInflamavel.isSelected()
                     );
                     break;
             }
@@ -303,7 +302,6 @@ public class Interface extends JFrame {
             ProdutoLimpeza pl = (ProdutoLimpeza) produto;
             categoriaBox.setSelectedItem("Produto de Limpeza");
             checkInflamavel.setSelected(pl.isInflamavel());
-            campoTipoLimpeza.setText(pl.getTipo());
         }
     }
 

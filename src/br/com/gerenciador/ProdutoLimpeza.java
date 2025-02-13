@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 public class ProdutoLimpeza extends Produto {
     protected boolean inflamavel;
-    protected String tipo; // Ex: desinfetante, detergente, sabão em pó
+
 
     @Override
     public String getCategoria() {
@@ -18,18 +18,9 @@ public class ProdutoLimpeza extends Produto {
         this.inflamavel = inflamavel;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca,boolean inflamavel, String tipo) {
+    public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca,boolean inflamavel) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
         this.inflamavel = inflamavel;
-        this.tipo = tipo;
     }
 }
 

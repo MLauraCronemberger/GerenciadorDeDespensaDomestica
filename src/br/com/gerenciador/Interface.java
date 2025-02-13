@@ -96,7 +96,7 @@ public class Interface extends JFrame {
                 produto = new ProdutoHigiene(nome, quantidade, local, LocalDate.now(), validade, marca, "Cabelo");
                 break;
             case "Produto de Limpeza":
-                produto = new ProdutoLimpeza(nome, quantidade, local, LocalDate.now(), validade, marca, true, "Desinfetante");
+                produto = new ProdutoLimpeza(nome, quantidade, local, LocalDate.now(), validade, marca, true);
                 break;
         }
 
@@ -118,4 +118,5 @@ public class Interface extends JFrame {
     public static void main(String[] args) {
         new Interface();
     }
+
 }

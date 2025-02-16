@@ -3,10 +3,6 @@
  * Ela permite ao usuário adicionar, editar, remover e visualizar produtos na despensa
  * A interface é construída usando Swing e é dividida em painéis para organizar os campos de entrada,
  * botões e a lista de produtos
- *
- * @author Seu Nome
- * @version 1.0
- * @since 2023-10-01
  */
 package br.com.gerenciador;
 

@@ -84,13 +84,13 @@ public class Interface extends JFrame {
         addFormField(formPanel, "Categoria:", categoriaBox, gbc, 5);
     }
 /**
-        * Adiciona um campo de formulário ao painel de formulários.
-     *
-             * @param panel O painel ao qual o campo será adicionado.
-     * @param label O rótulo do campo.
-     * @param component O componente do campo (JTextField, JComboBox, etc.).
-            * @param gbc GridBagConstraints usado para posicionar o componente.
-     * @param row A linha na qual o campo será posicionado.
+    * Adiciona um campo de formulário ao painel de formulários.
+    *
+    * @param panel O painel ao qual o campo será adicionado.
+    * @param label O rótulo do campo.
+    * @param component O componente do campo (JTextField, JComboBox, etc.).
+    * @param gbc GridBagConstraints usado para posicionar o componente.
+    * @param row A linha na qual o campo será posicionado.
      */
     private void addFormField(JPanel panel, String label, JComponent component,
                               GridBagConstraints gbc, int row) {

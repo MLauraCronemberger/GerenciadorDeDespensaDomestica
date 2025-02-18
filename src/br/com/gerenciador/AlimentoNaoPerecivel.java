@@ -37,8 +37,8 @@ public class AlimentoNaoPerecivel extends Alimento {
     }
 
     //Construtor da classe alimento não perecível
-    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
-        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares, organico);
+    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
+        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares);
         this.enlatado = enlatado;
         this.embalagemVacuo = embalagemVacuo;
         this.modoArmazenamento = modoArmazenamento;

@@ -17,7 +17,7 @@ public class Interface extends JFrame {
     private JPanel mainPanel, formPanel, buttonPanel, listPanel, camposEspecificosPanel;
     private JTextField campoNome, campoQuantidade, campoLocal, campoMarca, campoValidade, campoRestricoesAlimentaresPerecivel, campoRestricoesAlimentaresNaoPerecivel,campoParteCorpo;
     private JComboBox<String> categoriaBox;
-    private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkOrganico, checkInflamavel;
+    private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkInflamavel;
     private JList<String> produtosList;
     private DefaultListModel<String> listModel;
     private JButton btnAdicionar, btnEditar, btnRemover, btnVisualizar;
@@ -109,14 +109,12 @@ public class Interface extends JFrame {
         JPanel perecivelPanel = new JPanel(new GridLayout(0, 1, 5, 5));
         checkRefrigerado = new JCheckBox("Refrigerado");
         checkCongelado = new JCheckBox("Congelado");
-        checkOrganico = new JCheckBox("Orgânico");
 
         // Campo de texto para restrições alimentares
         campoRestricoesAlimentaresPerecivel = new JTextField(20);
 
         perecivelPanel.add(checkRefrigerado);
         perecivelPanel.add(checkCongelado);
-        perecivelPanel.add(checkOrganico);
         perecivelPanel.add(new JLabel("Restrições Alimentares:"));
         perecivelPanel.add(campoRestricoesAlimentaresPerecivel);
 
@@ -128,7 +126,6 @@ public class Interface extends JFrame {
 
         naoPerecivelPanel.add(checkEnlatado);
         naoPerecivelPanel.add(checkEmbalagemVacuo);
-        naoPerecivelPanel.add(checkOrganico);
         naoPerecivelPanel.add(new JLabel("Restrições Alimentares:"));
         naoPerecivelPanel.add(campoRestricoesAlimentaresNaoPerecivel);
 
@@ -214,7 +211,7 @@ public class Interface extends JFrame {
                 case "Alimento Perecível":
                     produto = new AlimentoPerecivel(
                             nome, quantidade, local, validade, marca,
-                            restricaoAlimentarPerecivel, checkOrganico.isSelected(),
+                            restricaoAlimentarPerecivel,
                             checkRefrigerado.isSelected(), checkCongelado.isSelected(),
                             false
                     );
@@ -222,7 +219,7 @@ public class Interface extends JFrame {
                 case "Alimento Não Perecível":
                     produto = new AlimentoNaoPerecivel(
                             nome, quantidade, local, validade, marca,
-                            restricaoAlimentarNaoPerecivel, checkOrganico.isSelected(),
+                            restricaoAlimentarNaoPerecivel,
                             checkEnlatado.isSelected(), checkEmbalagemVacuo.isSelected(),
                             false, "Lugar seco"
                     );
@@ -296,14 +293,12 @@ public class Interface extends JFrame {
                 AlimentoPerecivel ap = (AlimentoPerecivel) produto;
                 detalhes.append("Detalhes do Alimento Perecível:\n");
                 detalhes.append("Restrições Alimentares: ").append(((Alimento) ap).getRestricoesAlimentares()).append("\n");
-                detalhes.append("Orgânico: ").append(((Alimento) ap).getOrganico() ? "Sim" : "Não").append("\n");
                 detalhes.append("Refrigerado: ").append(ap.getRefrigerado() ? "Sim" : "Não").append("\n");
                 detalhes.append("Congelado: ").append(ap.getCongelado() ? "Sim" : "Não").append("\n");
             } else if (produto instanceof AlimentoNaoPerecivel) {
                 AlimentoNaoPerecivel anp = (AlimentoNaoPerecivel) produto;
                 detalhes.append("Detalhes do Alimento Não Perecível:\n");
                 detalhes.append("Restrições Alimentares: ").append(((Alimento) anp).getRestricoesAlimentares()).append("\n");
-                detalhes.append("Orgânico: ").append(((Alimento) anp).getOrganico() ? "Sim" : "Não").append("\n");
                 detalhes.append("Enlatado: ").append(anp.getEnlatado() ? "Sim" : "Não").append("\n");
                 detalhes.append("Embalagem a Vácuo: ").append(anp.getEmbalagemVacuo() ? "Sim" : "Não").append("\n");
             } else if (produto instanceof ProdutoHigiene) {
@@ -372,14 +367,12 @@ public class Interface extends JFrame {
             categoriaBox.setSelectedItem("Alimento Perecível");
             checkRefrigerado.setSelected(ap.getRefrigerado());
             checkCongelado.setSelected(ap.getCongelado());
-            checkOrganico.setSelected(((Alimento) ap).getOrganico());
             campoRestricoesAlimentaresPerecivel.setText(((Alimento) ap).getRestricoesAlimentares());
         } else if (produto instanceof AlimentoNaoPerecivel) {
             AlimentoNaoPerecivel anp = (AlimentoNaoPerecivel) produto;
             categoriaBox.setSelectedItem("Alimento Não Perecível");
             checkEnlatado.setSelected(anp.getEnlatado());
             checkEmbalagemVacuo.setSelected(anp.getEmbalagemVacuo());
-            checkOrganico.setSelected(((Alimento) anp).getOrganico());
             campoRestricoesAlimentaresNaoPerecivel.setText(((Alimento) anp).getRestricoesAlimentares());
         } else if (produto instanceof ProdutoHigiene) {
             ProdutoHigiene ph = (ProdutoHigiene) produto;
@@ -418,7 +411,6 @@ public class Interface extends JFrame {
         checkCongelado.setSelected(false);
         checkEnlatado.setSelected(false);
         checkEmbalagemVacuo.setSelected(false);
-        checkOrganico.setSelected(false);
         checkInflamavel.setSelected(false);
 
         // Resetar para a primeira categoria

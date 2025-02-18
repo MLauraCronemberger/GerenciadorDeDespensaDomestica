@@ -29,8 +29,8 @@ public class AlimentoPerecivel extends Alimento {
     }
 
     //Construtor da classe- Alimento  Perecível
-    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected) {
-        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares, organico);
+    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean refrigerado, boolean congelado, boolean selected) {
+        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares);
         this.refrigerado = refrigerado;
         this.congelado = congelado;
     }

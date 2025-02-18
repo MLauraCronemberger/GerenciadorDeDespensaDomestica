@@ -20,7 +20,7 @@ public class Interface extends JFrame {
     private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkOrganico, checkInflamavel;
     private JList<String> produtosList;
     private DefaultListModel<String> listModel;
-    private JButton btnAdicionar, btnEditar, btnRemover, btnLimpar;
+    private JButton btnAdicionar, btnEditar, btnRemover, btnVisualizar;
     private CardLayout cardLayout;
 
     //Construtor da classe Interface. Inicializa a interface gráfica e configura todos os componentes
@@ -153,12 +153,12 @@ public class Interface extends JFrame {
         btnAdicionar = new JButton("Adicionar");
         btnEditar = new JButton("Editar");
         btnRemover = new JButton("Remover");
-        btnLimpar = new JButton("Limpar Campos");
+        btnVisualizar = new JButton("Visualizar Produto");
 
         buttonPanel.add(btnAdicionar);
         buttonPanel.add(btnEditar);
         buttonPanel.add(btnRemover);
-        buttonPanel.add(btnLimpar);
+        buttonPanel.add(btnVisualizar);
     }
 
     private void createList() {
@@ -189,7 +189,7 @@ public class Interface extends JFrame {
         btnAdicionar.addActionListener(e -> adicionarProduto());
         btnEditar.addActionListener(e -> editarProduto());
         btnRemover.addActionListener(e -> removerProduto());
-        btnLimpar.addActionListener(e -> limparCampos());
+        btnVisualizar.addActionListener(e -> visualizarProduto());
 
         atualizarListaProdutos();
     }
@@ -201,7 +201,6 @@ public class Interface extends JFrame {
             String local = campoLocal.getText();
             String marca = campoMarca.getText();
             LocalDate validade = LocalDate.parse(campoValidade.getText());
-            LocalDate dataCompra = LocalDate.now();
 
             // Pega a restrição alimentar digitada no campo de texto
             String restricaoAlimentarPerecivel = campoRestricoesAlimentaresPerecivel.getText();
@@ -214,15 +213,15 @@ public class Interface extends JFrame {
             switch (categoriaSelecionada) {
                 case "Alimento Perecível":
                     produto = new AlimentoPerecivel(
-                            nome, quantidade, local, dataCompra, validade, marca,
+                            nome, quantidade, local, validade, marca,
                             restricaoAlimentarPerecivel, checkOrganico.isSelected(),
                             checkRefrigerado.isSelected(), checkCongelado.isSelected(),
-                            false, dataCompra
+                            false
                     );
                     break;
                 case "Alimento Não Perecível":
                     produto = new AlimentoNaoPerecivel(
-                            nome, quantidade, local, dataCompra, validade, marca,
+                            nome, quantidade, local, validade, marca,
                             restricaoAlimentarNaoPerecivel, checkOrganico.isSelected(),
                             checkEnlatado.isSelected(), checkEmbalagemVacuo.isSelected(),
                             false, "Lugar seco"
@@ -230,13 +229,13 @@ public class Interface extends JFrame {
                     break;
                 case "Produto de Higiene":
                     produto = new ProdutoHigiene(
-                            nome, quantidade, local, dataCompra, validade, marca,
+                            nome, quantidade, local, validade, marca,
                             campoParteCorpo.getText()
                     );
                     break;
                 case "Produto de Limpeza":
                     produto = new ProdutoLimpeza(
-                            nome, quantidade, local, dataCompra, validade, marca, checkInflamavel.isSelected()
+                            nome, quantidade, local, validade, marca, checkInflamavel.isSelected()
                     );
                     break;
             }
@@ -263,12 +262,75 @@ public class Interface extends JFrame {
             return;
         }
 
-        String nome = selectedValue.split(" - ")[0];
+        String nome = selectedValue.split(" - ")[1];
         Produto produto = gerenciador.buscarProduto(nome);
         if (produto != null) {
             preencherCamposComProduto(produto);
             // Remove o produto antigo para ser substituído pelo editado
             gerenciador.removerProduto(nome);
+        }
+    }
+
+    private void visualizarProduto() {
+        String selectedValue = produtosList.getSelectedValue();
+        if (selectedValue == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um produto para visualizar!");
+            return;
+        }
+
+        String nome = selectedValue.split(" - ")[1].trim();
+        Produto produto = gerenciador.buscarProduto(nome);
+
+        if (produto != null) {
+            StringBuilder detalhes = new StringBuilder();
+            detalhes.append("Detalhes do Produto:\n\n");
+            detalhes.append("Nome: ").append(produto.getNome()).append("\n");
+            detalhes.append("Categoria: ").append(produto.getCategoria()).append("\n");
+            detalhes.append("Quantidade: ").append(produto.getQuantidade()).append("\n");
+            detalhes.append("Local: ").append(produto.getLocalArmazenamento()).append("\n");
+            detalhes.append("Marca: ").append(produto.getMarca()).append("\n");
+            detalhes.append("Validade: ").append(produto.getValidade()).append("\n\n");
+
+            // Adiciona detalhes específicos baseado no tipo do produto
+            if (produto instanceof AlimentoPerecivel) {
+                AlimentoPerecivel ap = (AlimentoPerecivel) produto;
+                detalhes.append("Detalhes do Alimento Perecível:\n");
+                detalhes.append("Restrições Alimentares: ").append(((Alimento) ap).getRestricoesAlimentares()).append("\n");
+                detalhes.append("Orgânico: ").append(((Alimento) ap).getOrganico() ? "Sim" : "Não").append("\n");
+                detalhes.append("Refrigerado: ").append(ap.getRefrigerado() ? "Sim" : "Não").append("\n");
+                detalhes.append("Congelado: ").append(ap.getCongelado() ? "Sim" : "Não").append("\n");
+            } else if (produto instanceof AlimentoNaoPerecivel) {
+                AlimentoNaoPerecivel anp = (AlimentoNaoPerecivel) produto;
+                detalhes.append("Detalhes do Alimento Não Perecível:\n");
+                detalhes.append("Restrições Alimentares: ").append(((Alimento) anp).getRestricoesAlimentares()).append("\n");
+                detalhes.append("Orgânico: ").append(((Alimento) anp).getOrganico() ? "Sim" : "Não").append("\n");
+                detalhes.append("Enlatado: ").append(anp.getEnlatado() ? "Sim" : "Não").append("\n");
+                detalhes.append("Embalagem a Vácuo: ").append(anp.getEmbalagemVacuo() ? "Sim" : "Não").append("\n");
+            } else if (produto instanceof ProdutoHigiene) {
+                ProdutoHigiene ph = (ProdutoHigiene) produto;
+                detalhes.append("Detalhes do Produto de Higiene:\n");
+                detalhes.append("Parte do Corpo: ").append(ph.getPartedocorpo()).append("\n");
+            } else if (produto instanceof ProdutoLimpeza) {
+                ProdutoLimpeza pl = (ProdutoLimpeza) produto;
+                detalhes.append("Detalhes do Produto de Limpeza:\n");
+                detalhes.append("Inflamável: ").append(pl.getInflamavel() ? "Sim" : "Não").append("\n");
+            }
+
+            // Criar um JTextArea para mostrar os detalhes com formatação adequada
+            JTextArea textArea = new JTextArea(detalhes.toString());
+            textArea.setEditable(false);
+            textArea.setLineWrap(true);
+            textArea.setWrapStyleWord(true);
+
+            // Adicionar o JTextArea a um JScrollPane
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setPreferredSize(new Dimension(400, 300));
+
+            // Mostrar o diálogo com os detalhes
+            JOptionPane.showMessageDialog(this, scrollPane,
+                    "Visualização do Produto", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Produto não encontrado!");
         }
     }
 
@@ -287,7 +349,7 @@ public class Interface extends JFrame {
         );
 
         if (confirm == JOptionPane.YES_OPTION) {
-            String nome = selectedValue.split(" - ")[0];
+            String nome = selectedValue.split(" - ")[1];
             if (gerenciador.removerProduto(nome)) {
                 atualizarListaProdutos();
                 limparCampos();
@@ -334,7 +396,7 @@ public class Interface extends JFrame {
         listModel.clear();
         List<Produto> produtos = gerenciador.listarProdutos();
         for (Produto p : produtos) {
-            listModel.addElement(p.getCategoria() + " | " + p.getNome() + " | " + p.getQuantidade());
+            listModel.addElement(p.getCategoria() + " - " + p.getNome() + " - " + p.getQuantidade() + " - " + p.getLocalArmazenamento() + " - " + p.getValidade());
         }
     }
 

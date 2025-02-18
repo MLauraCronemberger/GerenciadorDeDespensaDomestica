@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class AlimentoPerecivel extends Alimento {
     protected boolean refrigerado;
     protected boolean congelado;
-    protected LocalDate dataFabricacao;
 
     //Polimorfismo- nessa classe o método getCategoria retorna "Alimento Perecível"
     @Override
@@ -29,19 +28,10 @@ public class AlimentoPerecivel extends Alimento {
         this.congelado = congelado;
     }
 
-    public LocalDate getDataFabricacao() {
-        return dataFabricacao;
-    }
-
-    public void setDataFabricacao(LocalDate dataFabricacao) {
-        this.dataFabricacao = dataFabricacao;
-    }
-
     //Construtor da classe- Alimento  Perecível
-    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected, LocalDate dataFabricacao) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
+    public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected) {
+        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares, organico);
         this.refrigerado = refrigerado;
         this.congelado = congelado;
-        this.dataFabricacao = dataFabricacao;
     }
 }

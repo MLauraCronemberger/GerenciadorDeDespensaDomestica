@@ -29,8 +29,8 @@ public class Alimento extends Produto {
     }
 
     //Construtor da classe Alimento.
-    public Alimento(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
+    public Alimento(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean organico) {
+        super(nome, quantidade, localArmazenamento, validade, marca);
         this.restricoesAlimentares = restricoesAlimentares;
         this.organico = organico;
     }

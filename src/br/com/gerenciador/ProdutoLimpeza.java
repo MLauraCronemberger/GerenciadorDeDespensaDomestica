@@ -22,8 +22,8 @@ public class ProdutoLimpeza extends Produto {
     }
 
     //Construtor da classe ProdutoLimpeza.
-    public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, boolean inflamavel) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
+    public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, boolean inflamavel) {
+        super(nome, quantidade, localArmazenamento, validade, marca);
         this.inflamavel = inflamavel;
     }
 }

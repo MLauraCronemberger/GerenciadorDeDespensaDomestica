@@ -4,7 +4,6 @@ import java.time.LocalDate;
 public abstract class Produto {
     protected String nome;
     protected Double quantidade;
-    protected LocalDate datacompra;
     protected LocalDate validade;
     protected String localArmazenamento;
     protected String marca;
@@ -26,14 +25,6 @@ public abstract class Produto {
 
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public LocalDate getDatacompra() {
-        return datacompra;
-    }
-
-    public void setDatacompra(LocalDate datacompra) {
-        this.datacompra = datacompra;
     }
 
     public LocalDate getValidade() {
@@ -61,11 +52,10 @@ public abstract class Produto {
     }
 
     //Construtor da classe Produto
-    public Produto(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca) {
+    public Produto(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.localArmazenamento = localArmazenamento;
-        this.datacompra = datacompra;
         this.validade = validade;
         this.marca = marca;
     }

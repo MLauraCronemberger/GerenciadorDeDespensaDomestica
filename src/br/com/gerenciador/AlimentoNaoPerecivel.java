@@ -7,6 +7,7 @@ public class AlimentoNaoPerecivel extends Alimento {
     protected boolean embalagemVacuo;
     protected String modoArmazenamento;
 
+    //Polimorfismo- nessa classe o método getCategoria retorna "Alimento Não Perecível"
     @Override
     public String getCategoria() {
         return "Alimento Não Perecível";
@@ -36,8 +37,8 @@ public class AlimentoNaoPerecivel extends Alimento {
     }
 
     //Construtor da classe alimento não perecível
-    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
+    public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
+        super(nome, quantidade, localArmazenamento, validade, marca, restricoesAlimentares, organico);
         this.enlatado = enlatado;
         this.embalagemVacuo = embalagemVacuo;
         this.modoArmazenamento = modoArmazenamento;

@@ -20,8 +20,8 @@ public class ProdutoHigiene extends Produto {
     }
     
     //Construtor da classe- ProdutoHigiene
-    public ProdutoHigiene(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String parteDoCorpo) {
-        super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
+    public ProdutoHigiene(String nome, Double quantidade, String localArmazenamento, LocalDate validade, String marca, String parteDoCorpo) {
+        super(nome, quantidade, localArmazenamento, validade, marca);
         this.parteDoCorpo = parteDoCorpo;
     }
 }

@@ -81,7 +81,7 @@ public class Interface extends JFrame {
         addFormField(formPanel, "Validade (AAAA-MM-DD):", campoValidade, gbc, 4);
         addFormField(formPanel, "Categoria:", categoriaBox, gbc, 5);
     }
-/**
+    /**
     * Adiciona um campo de formulário ao painel de formulários.
     *
     * @param panel O painel ao qual o campo será adicionado.
@@ -326,7 +326,7 @@ public class Interface extends JFrame {
         } else if (produto instanceof ProdutoLimpeza) {
             ProdutoLimpeza pl = (ProdutoLimpeza) produto;
             categoriaBox.setSelectedItem("Produto de Limpeza");
-            checkInflamavel.setSelected(pl.isInflamavel());
+            checkInflamavel.setSelected(pl.getInflamavel());
         }
     }
 
@@ -334,7 +334,7 @@ public class Interface extends JFrame {
         listModel.clear();
         List<Produto> produtos = gerenciador.listarProdutos();
         for (Produto p : produtos) {
-            listModel.addElement(p.getNome() + " - " + p.getCategoria());
+            listModel.addElement(p.getCategoria() + " | " + p.getNome() + " | " + p.getQuantidade());
         }
     }
 

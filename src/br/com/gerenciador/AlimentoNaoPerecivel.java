@@ -7,8 +7,11 @@ public class AlimentoNaoPerecivel extends Alimento {
     protected boolean embalagemVacuo;
     protected String modoArmazenamento;
 
-//Gets e Sets dos atributos
-//Get e Set- Enlatado
+    @Override
+    public String getCategoria() {
+        return "Alimento Não Perecível";
+    }
+
     public boolean getEnlatado() {
         return enlatado;
     }
@@ -16,7 +19,6 @@ public class AlimentoNaoPerecivel extends Alimento {
         this.enlatado = enlatado;
     }
 
-//Get e Set- Embalagem a Vacuo
     public boolean getEmbalagemVacuo() {
         return embalagemVacuo;
     }
@@ -25,7 +27,6 @@ public class AlimentoNaoPerecivel extends Alimento {
         this.embalagemVacuo = embalagemVacuo;
     }
 
-//Get e Set- Modo de Armazenamento
     public String getModoArmazenamento() {
         return modoArmazenamento;
     }
@@ -34,7 +35,7 @@ public class AlimentoNaoPerecivel extends Alimento {
         this.modoArmazenamento = modoArmazenamento;
     }
 
-//Construtor da classe alimento não perecível
+    //Construtor da classe alimento não perecível
     public AlimentoNaoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean enlatado, boolean embalagemVacuo, boolean selected, String modoArmazenamento) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
         this.enlatado = enlatado;

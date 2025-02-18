@@ -7,14 +7,13 @@ public class ProdutoLimpeza extends Produto {
 
     protected boolean inflamavel;
 
-//Polimorfismo- Nessa classe o método getCateagoria retorna
+    //Polimorfismo- Nessa classe o método getCateagoria retorna Produto de Limpeza
     @Override
     public String getCategoria() {
-        return "Limpeza";
+        return "Produto de Limpeza";
     }
 
-//Método de inflamavel
-    public boolean isInflamavel() {
+    public boolean getInflamavel() {
         return inflamavel;
     }
 
@@ -22,8 +21,7 @@ public class ProdutoLimpeza extends Produto {
         this.inflamavel = inflamavel;
     }
 
-//Construtor da classe ProdutoLimpeza.
-
+    //Construtor da classe ProdutoLimpeza.
     public ProdutoLimpeza(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, boolean inflamavel) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
         this.inflamavel = inflamavel;

@@ -6,14 +6,12 @@ public class Alimento extends Produto {
     protected String restricoesAlimentares;
     protected boolean organico;
 
-//Polimorfismo- nessa classe o método getCategoria retorna "Higiene"
+    //Polimorfismo- nessa classe o método getCategoria retorna "Alimento"
     @Override
     public String getCategoria() {
         return "Alimento";
-}
+    }
 
-//Get e Sets dos Atributos
-//Get e Set- Restricao Alimentar
     public String getRestricoesAlimentares() {
         return restricoesAlimentares;
     }
@@ -22,7 +20,6 @@ public class Alimento extends Produto {
         this.restricoesAlimentares = restricoesAlimentares;
     }
 
-//Get e Set- Orgânico
     public boolean getOrganico() {
         return organico;
     }
@@ -31,8 +28,7 @@ public class Alimento extends Produto {
         this.organico = organico;
     }
 
-
-//Construtor da classe Alimento.
+    //Construtor da classe Alimento.
     public Alimento(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca);
         this.restricoesAlimentares = restricoesAlimentares;

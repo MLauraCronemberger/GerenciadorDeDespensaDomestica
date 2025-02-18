@@ -7,8 +7,12 @@ public class AlimentoPerecivel extends Alimento {
     protected boolean congelado;
     protected LocalDate dataFabricacao;
 
-//Gets e Sets dos atributos
-//Get e Set- Refrigerado
+    //Polimorfismo- nessa classe o método getCategoria retorna "Alimento Perecível"
+    @Override
+    public String getCategoria() {
+        return "Alimento Perecível";
+    }
+
     public boolean getRefrigerado() {
         return refrigerado;
     }
@@ -17,7 +21,6 @@ public class AlimentoPerecivel extends Alimento {
         this.refrigerado = refrigerado;
     }
 
-//Get e Set- Congelado
     public boolean getCongelado() {
         return congelado;
     }
@@ -26,17 +29,15 @@ public class AlimentoPerecivel extends Alimento {
         this.congelado = congelado;
     }
 
-//Get e Set- Data de Fabricacao
     public LocalDate getDataFabricacao() {
         return dataFabricacao;
     }
-
 
     public void setDataFabricacao(LocalDate dataFabricacao) {
         this.dataFabricacao = dataFabricacao;
     }
 
-//Construtor da classe- Alimento  Perecível
+    //Construtor da classe- Alimento  Perecível
     public AlimentoPerecivel(String nome, Double quantidade, String localArmazenamento, LocalDate datacompra, LocalDate validade, String marca, String restricoesAlimentares, boolean organico, boolean refrigerado, boolean congelado, boolean selected, LocalDate dataFabricacao) {
         super(nome, quantidade, localArmazenamento, datacompra, validade, marca, restricoesAlimentares, organico);
         this.refrigerado = refrigerado;

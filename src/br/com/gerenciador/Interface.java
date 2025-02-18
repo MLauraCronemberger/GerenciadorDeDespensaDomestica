@@ -36,7 +36,7 @@ public class Interface extends JFrame {
         addListeners();
     }
 
-//Configura as propriedades básicas da janela, como título, tamanho e comportamento de fechamento
+    //Configura as propriedades básicas da janela, como título, tamanho e comportamento de fechamento
     private void configureFrame() {
         setTitle("Gerenciador de Despensa");
         setSize(800, 600);
@@ -44,7 +44,7 @@ public class Interface extends JFrame {
         setLocationRelativeTo(null);
     }
 
-//Cria e configura os painéis principais da interface
+    //Cria e configura os painéis principais da interface
     private void createPanels() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
         formPanel = new JPanel(new GridBagLayout());
@@ -100,10 +100,9 @@ public class Interface extends JFrame {
         gbc.gridy = row;
         panel.add(component, gbc);
     }
-    /**
-     * Cria os campos específicos para cada categoria de produto.
-     */
 
+
+    //Cria os campos específicos para cada categoria de produto.
     private void createSpecificFields() {
         // Campos para Alimento Perecível
         JPanel perecivelPanel = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -191,6 +190,7 @@ public class Interface extends JFrame {
         atualizarListaProdutos();
     }
 
+    // Adicionar produto à lista
     private void adicionarProduto() {
         try {
             String nome = campoNome.getText();
@@ -252,6 +252,7 @@ public class Interface extends JFrame {
         }
     }
 
+    // Editar produto selecionado
     private void editarProduto() {
         String selectedValue = produtosList.getSelectedValue();
         if (selectedValue == null) {
@@ -268,6 +269,7 @@ public class Interface extends JFrame {
         }
     }
 
+    // Exibir caixa com detalhamento do produto selecionado
     private void visualizarProduto() {
         String selectedValue = produtosList.getSelectedValue();
         if (selectedValue == null) {
@@ -311,7 +313,7 @@ public class Interface extends JFrame {
                 detalhes.append("Inflamável: ").append(pl.getInflamavel() ? "Sim" : "Não").append("\n");
             }
 
-            // Criar um JTextArea para mostrar os detalhes com formatação adequada
+            // Criar um JTextArea para mostrar os detalhes
             JTextArea textArea = new JTextArea(detalhes.toString());
             textArea.setEditable(false);
             textArea.setLineWrap(true);
@@ -321,7 +323,6 @@ public class Interface extends JFrame {
             JScrollPane scrollPane = new JScrollPane(textArea);
             scrollPane.setPreferredSize(new Dimension(400, 300));
 
-            // Mostrar o diálogo com os detalhes
             JOptionPane.showMessageDialog(this, scrollPane,
                     "Visualização do Produto", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -329,6 +330,7 @@ public class Interface extends JFrame {
         }
     }
 
+    // Remover produto da lista
     private void removerProduto() {
         String selectedValue = produtosList.getSelectedValue();
         if (selectedValue == null) {
@@ -355,6 +357,7 @@ public class Interface extends JFrame {
         }
     }
 
+    // Preencher os campos com os dados do produto cadastrado
     private void preencherCamposComProduto(Produto produto) {
         campoNome.setText(produto.getNome());
         campoQuantidade.setText(String.valueOf(produto.getQuantidade()));
@@ -385,6 +388,7 @@ public class Interface extends JFrame {
         }
     }
 
+    // Atualizar lista de produtos exibida
     private void atualizarListaProdutos() {
         listModel.clear();
         List<Produto> produtos = gerenciador.listarProdutos();
@@ -397,6 +401,7 @@ public class Interface extends JFrame {
     }
 
     private void limparCampos() {
+        // Limpar campos texto
         campoNome.setText("");
         campoQuantidade.setText("");
         campoLocal.setText("");

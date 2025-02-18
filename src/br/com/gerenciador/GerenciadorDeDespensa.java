@@ -8,40 +8,36 @@ import java.util.List;
 
 public class GerenciadorDeDespensa {
 
-//Lista de produtos armazenados na despensa.
+    //Lista de produtos armazenados na despensa.
     private List<Produto> produtos;
 
 
-//Construtor da classe GerenciadorDeDespensa.
-//Inicializa a lista de produtos.
+    //Construtor da classe GerenciadorDeDespensa.
+    //Inicializa a lista de produtos.
     public GerenciadorDeDespensa() {
         this.produtos = new ArrayList<>();
     }
 
-
-//Retorna a lista de produtos armazenados na despensa.
+    //Retorna a lista de produtos armazenados na despensa.
     public List<Produto> getProdutos() {
         return produtos;
     }
 
-
-//Adiciona um produto à lista de produtos.
+    //Adiciona um produto à lista de produtos.
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
         System.out.println("Produto adicionado: " + produto.getNome());
     }
 
-
-//Remove um produto da lista de produtos pelo nome.
-//True se o produto foi removido com sucesso, False caso contrário
+    //Remove um produto da lista de produtos pelo nome.
+    //True se o produto foi removido com sucesso, False caso contrário
     public boolean removerProduto(String nome) {
         return produtos.removeIf(produto -> produto.getNome().equalsIgnoreCase(nome));
     }
 
-
-//Edita um produto existente na lista de produtos.
-//Busca o produto pelo nome e substitui pelo novo produto.
-//True se o produto foi editado com sucesso, False caso contrário
+    //Edita um produto existente na lista de produtos.
+    //Busca o produto pelo nome e substitui pelo novo produto.
+    //True se o produto foi editado com sucesso, False caso contrário
     public boolean editarProduto(String nomeAntigo, Produto novoProduto) {
         for (int i = 0; i < produtos.size(); i++) {
             if (produtos.get(i).getNome().equalsIgnoreCase(nomeAntigo)) {
@@ -52,25 +48,12 @@ public class GerenciadorDeDespensa {
         return false;
     }
 
-//Retorna uma lista com todos os produtos armazenados na despensa.
+    //Retorna uma lista com todos os produtos armazenados na despensa.
     public List<Produto> listarProdutos() {
         return new ArrayList<>(produtos);
     }
 
-//Retorna uma lista de produtos filtrados por categoria.
-
-    public List<Produto> listarPorCategoria(String categoria) {
-        List<Produto> filtrados = new ArrayList<>();
-        for (Produto p : produtos) {
-            if (p.getCategoria().equalsIgnoreCase(categoria)) {
-                filtrados.add(p);
-            }
-        }
-        return filtrados;
-    }
-
-
-//Busca um produto na lista de produtos pelo nome.
+    //Busca um produto na lista de produtos pelo nome.
     public Produto buscarProduto(String nome) {
         for (Produto produto : produtos) {
             if (produto.getNome().equalsIgnoreCase(nome)) {

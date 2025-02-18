@@ -395,8 +395,11 @@ public class Interface extends JFrame {
     private void atualizarListaProdutos() {
         listModel.clear();
         List<Produto> produtos = gerenciador.listarProdutos();
+        listModel.addElement("Categoria - Nome - Quantidade - Local de Armazenamento - Validade");
+        listModel.addElement("       ");
         for (Produto p : produtos) {
             listModel.addElement(p.getCategoria() + " - " + p.getNome() + " - " + p.getQuantidade() + " - " + p.getLocalArmazenamento() + " - " + p.getValidade());
+            listModel.addElement("       ");
         }
     }
 

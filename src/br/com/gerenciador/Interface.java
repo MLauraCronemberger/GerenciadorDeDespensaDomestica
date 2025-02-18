@@ -12,22 +12,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-//Construtor da classe Interface. Inicializa a interface gráfica e configura todos os componentes
 public class Interface extends JFrame {
     private GerenciadorDeDespensa gerenciador;
-    private JPanel mainPanel, formPanel, buttonPanel, listPanel;
-    private JTextField campoNome, campoQuantidade, campoLocal, campoMarca, campoValidade;
+    private JPanel mainPanel, formPanel, buttonPanel, listPanel, camposEspecificosPanel;
+    private JTextField campoNome, campoQuantidade, campoLocal, campoMarca, campoValidade, campoRestricoesAlimentaresPerecivel, campoRestricoesAlimentaresNaoPerecivel,campoParteCorpo;
     private JComboBox<String> categoriaBox;
-    private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkOrganico;
-    private JTextField campoRestricoesAlimentares; // Campo de texto para restrições alimentares
-    private JTextField campoParteCorpo, campoTipoLimpeza;
-    private JCheckBox checkInflamavel;
+    private JCheckBox checkRefrigerado, checkCongelado, checkEnlatado, checkEmbalagemVacuo, checkOrganico, checkInflamavel;
     private JList<String> produtosList;
     private DefaultListModel<String> listModel;
     private JButton btnAdicionar, btnEditar, btnRemover, btnLimpar;
     private CardLayout cardLayout;
-    private JPanel camposEspecificosPanel;
 
+    //Construtor da classe Interface. Inicializa a interface gráfica e configura todos os componentes
     public Interface() {
         gerenciador = new GerenciadorDeDespensa();
         configureFrame();
@@ -39,6 +35,7 @@ public class Interface extends JFrame {
         layoutComponents();
         addListeners();
     }
+
 //Configura as propriedades básicas da janela, como título, tamanho e comportamento de fechamento
     private void configureFrame() {
         setTitle("Gerenciador de Despensa");
@@ -46,6 +43,7 @@ public class Interface extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
+
 //Cria e configura os painéis principais da interface
     private void createPanels() {
         mainPanel = new JPanel(new BorderLayout(10, 10));
@@ -114,24 +112,25 @@ public class Interface extends JFrame {
         checkOrganico = new JCheckBox("Orgânico");
 
         // Campo de texto para restrições alimentares
-        campoRestricoesAlimentares = new JTextField(20);
+        campoRestricoesAlimentaresPerecivel = new JTextField(20);
 
         perecivelPanel.add(checkRefrigerado);
         perecivelPanel.add(checkCongelado);
         perecivelPanel.add(checkOrganico);
         perecivelPanel.add(new JLabel("Restrições Alimentares:"));
-        perecivelPanel.add(campoRestricoesAlimentares);
+        perecivelPanel.add(campoRestricoesAlimentaresPerecivel);
 
         // Campos para Alimento Não Perecível
         JPanel naoPerecivelPanel = new JPanel(new GridLayout(0, 1, 5, 5));
         checkEnlatado = new JCheckBox("Enlatado");
         checkEmbalagemVacuo = new JCheckBox("Embalagem a Vácuo");
+        campoRestricoesAlimentaresNaoPerecivel = new JTextField(20);
 
         naoPerecivelPanel.add(checkEnlatado);
         naoPerecivelPanel.add(checkEmbalagemVacuo);
         naoPerecivelPanel.add(checkOrganico);
         naoPerecivelPanel.add(new JLabel("Restrições Alimentares:"));
-        naoPerecivelPanel.add(campoRestricoesAlimentares);
+        naoPerecivelPanel.add(campoRestricoesAlimentaresNaoPerecivel);
 
         // Campos para Produto de Higiene
         JPanel higienePanel = new JPanel(new GridLayout(0, 1, 5, 5));
@@ -142,10 +141,7 @@ public class Interface extends JFrame {
         // Campos para Produto de Limpeza
         JPanel limpezaPanel = new JPanel(new GridLayout(0, 1, 5, 5));
         checkInflamavel = new JCheckBox("Inflamável");
-        campoTipoLimpeza = new JTextField(20);
         limpezaPanel.add(checkInflamavel);
-        limpezaPanel.add(new JLabel("Tipo de Produto:"));
-        limpezaPanel.add(campoTipoLimpeza);
 
         camposEspecificosPanel.add(perecivelPanel, "Alimento Perecível");
         camposEspecificosPanel.add(naoPerecivelPanel, "Alimento Não Perecível");
@@ -208,7 +204,9 @@ public class Interface extends JFrame {
             LocalDate dataCompra = LocalDate.now();
 
             // Pega a restrição alimentar digitada no campo de texto
-            String restricaoAlimentar = campoRestricoesAlimentares.getText();
+            String restricaoAlimentarPerecivel = campoRestricoesAlimentaresPerecivel.getText();
+
+            String restricaoAlimentarNaoPerecivel = campoRestricoesAlimentaresNaoPerecivel.getText();
 
             String categoriaSelecionada = (String) categoriaBox.getSelectedItem();
             Produto produto = null;
@@ -217,7 +215,7 @@ public class Interface extends JFrame {
                 case "Alimento Perecível":
                     produto = new AlimentoPerecivel(
                             nome, quantidade, local, dataCompra, validade, marca,
-                            restricaoAlimentar, checkOrganico.isSelected(),
+                            restricaoAlimentarPerecivel, checkOrganico.isSelected(),
                             checkRefrigerado.isSelected(), checkCongelado.isSelected(),
                             false, dataCompra
                     );
@@ -225,7 +223,7 @@ public class Interface extends JFrame {
                 case "Alimento Não Perecível":
                     produto = new AlimentoNaoPerecivel(
                             nome, quantidade, local, dataCompra, validade, marca,
-                            restricaoAlimentar, checkOrganico.isSelected(),
+                            restricaoAlimentarNaoPerecivel, checkOrganico.isSelected(),
                             checkEnlatado.isSelected(), checkEmbalagemVacuo.isSelected(),
                             false, "Lugar seco"
                     );
@@ -313,14 +311,14 @@ public class Interface extends JFrame {
             checkRefrigerado.setSelected(ap.getRefrigerado());
             checkCongelado.setSelected(ap.getCongelado());
             checkOrganico.setSelected(((Alimento) ap).getOrganico());
-            campoRestricoesAlimentares.setText(((Alimento) ap).getRestricoesAlimentares());
+            campoRestricoesAlimentaresPerecivel.setText(((Alimento) ap).getRestricoesAlimentares());
         } else if (produto instanceof AlimentoNaoPerecivel) {
             AlimentoNaoPerecivel anp = (AlimentoNaoPerecivel) produto;
             categoriaBox.setSelectedItem("Alimento Não Perecível");
             checkEnlatado.setSelected(anp.getEnlatado());
             checkEmbalagemVacuo.setSelected(anp.getEmbalagemVacuo());
             checkOrganico.setSelected(((Alimento) anp).getOrganico());
-            campoRestricoesAlimentares.setText(((Alimento) anp).getRestricoesAlimentares());
+            campoRestricoesAlimentaresNaoPerecivel.setText(((Alimento) anp).getRestricoesAlimentares());
         } else if (produto instanceof ProdutoHigiene) {
             ProdutoHigiene ph = (ProdutoHigiene) produto;
             categoriaBox.setSelectedItem("Produto de Higiene");
@@ -346,9 +344,9 @@ public class Interface extends JFrame {
         campoLocal.setText("");
         campoMarca.setText("");
         campoValidade.setText("");
-        campoRestricoesAlimentares.setText("");
+        campoRestricoesAlimentaresPerecivel.setText("");
+        campoRestricoesAlimentaresNaoPerecivel.setText("");
         campoParteCorpo.setText("");
-        campoTipoLimpeza.setText("");
 
         // Limpar checkboxes
         checkRefrigerado.setSelected(false);
